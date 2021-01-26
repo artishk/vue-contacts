@@ -1,0 +1,29 @@
+{
+  "JavaScript": {
+    "beautifiers": [
+      "Prettier",
+      "Pretty Diff",
+      "JS-Beautify",
+      "ESLint"
+    ]
+  },
+  "HTML": {
+    "beautifiers": [
+      "Pretty Diff",
+      "JS-Beautify"
+    ]
+  },
+  "CSS": {
+    "beautifiers": [
+      "Prettier",
+      "Pretty Diff",
+      "JS-Beautify",
+      "CSScomb"
+    ]
+  },
+  "Vue": {
+    "beautifiers": [
+      "Prettier"
+    ]
+  }
+}

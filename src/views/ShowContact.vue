@@ -1,54 +1,65 @@
 <template>
-  <div>
+  <div class="container">
     <b-form>
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
         <b-form-input id="input-1" v-model="form.name" required></b-form-input>
       </b-form-group>
-
-      <b-form-group id="input-group-2" label="Your email:" label-for="input-2">
+  
+      <b-form-group  v-for="(email, $index) in form.email" 
+       :key="$index" id="input-group-2" >
         <div>
           <b-form inline>
+            <b-form-select
+            id="input-2"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            v-model="email.type"
+            :options="options"
+            required
+          ></b-form-select>
             <b-form-input
               id="inline-form-input-email"
               class="mb-2 mr-sm-2 mb-sm-0"
-              v-model="form.email.work"
+              v-model="email.value"
             ></b-form-input>
-            <b-form-input
-              id="inline-form-input-email"
-              class="mb-2 mr-sm-2 mb-sm-0"
-            ></b-form-input>
+            
           </b-form>
         </div>
       </b-form-group>
-
-      <b-form-group id="input-group-3" label="Your Number:" label-for="input-3">
+  
+    
+      <b-form-group 
+       v-for="(mobile, $index) in form.mobile" 
+       :key="'hello'+$index"
+       id="input-group-3" >
         <b-form inline>
-          <b-form-input
-            id="input-2"
-            class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="form.mobile.work"
+         <b-form-select
+            id="input-3"
+        class="mb-2 mr-sm-2 mb-sm-0"
+            v-model="mobile.type"
+            :options="options"
             required
-          >
-          </b-form-input>
+          ></b-form-select>
+        
           <b-form-input
-            id="input-2"
+            id="input-4"
             class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="form.mobile.home"
+            v-model="mobile.value"
             required
           >
           </b-form-input>
         </b-form>
       </b-form-group>
+      
       <b-button
         @click="goBack"
-        class="mb-2 mr-sm-2 mb-sm-0"
+        class="mb-2 mr-sm-2 mb-sm-0 btn"
         type="submit"
         variant="primary"
         >Back</b-button
       >
       <b-button
-        @click="$emit('edit-Contact', form.ID)"
-        class="mb-2 mr-sm-2 mb-sm-0"
+        @click="editContact"
+        class="mb-2 mr-sm-2 mb-sm-0 btn"
         type="submit"
         variant="primary"
         >Edit</b-button
@@ -66,6 +77,7 @@ export default {
   data() {
     return {
       form: {},
+       options: [{ text: "select one", value: null }, { text: "Home", value: "home" },{ text: "Work", value: "work" }],
     };
   },
   methods: {
@@ -98,11 +110,19 @@ export default {
     axios
       .get("http://localhost:9190/getContactsByID/" + userId)
       .then((res) => {
+        
         this.form = res.data;
         console.log(this.form);
+        
       })
 
       .catch((err) => console.log(err));
   },
 };
 </script>
+<style >
+.container{
+  background-color: black;
+  color:white;
+}
+</style>

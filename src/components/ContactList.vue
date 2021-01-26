@@ -1,32 +1,46 @@
 <template>
-  <div>
-    <b-card class="card">
-      <b-list-group :key="contact.ID" v-for="contact in contacts">
-        <b-list-group-item button @click="$emit('show-contact', contact)">
-          {{ contact.name }}
-        </b-list-group-item>
-      </b-list-group>
-      <b-button @click="$emit('add-New')" class="btn" variant="primary"
-        >+</b-button
-      >
-    </b-card>
+  <div class="container">
+    <b-button @click="$emit('add-New')" class="btn" variant="success"
+      >+</b-button
+    >
+    <b-list-group style="max-width: 300px;">
+      <contact-list-item
+        :key="contact.ID"
+        v-for="contact in contacts"
+        :contact="contact"
+        @show-contact="$emit('show-contact', contact)"
+      />
+    </b-list-group>
   </div>
 </template>
+
 <script>
+import ContactListItem from "./ContactList.item.vue";
 export default {
   name: "ContactList",
-  props: ["contacts"],
+  components: {
+    ContactListItem
+  },
+  props: {
+    contacts: {
+      type: Array,
+      required: true
+    }
+  }
 };
 </script>
 
 <style scoped>
-.card {
-  width: 450px;
-  margin: auto;
+.itemcolor {
+  background: black;
+}
+.textstyle {
+  color: white;
 }
 .btn {
+  position: relative;
   border-radius: 100%;
-  margin: auto;
-  font-size: 85%;
+  margin: 30px 0 auto auto;
+  font-size: 95%;
 }
 </style>

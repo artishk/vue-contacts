@@ -18,38 +18,43 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    ContactsList,
+    ContactsList
   },
   data() {
     return {
-      contacts: [],
+      contacts: []
     };
   },
   methods: {
     addNewAccount() {
       this.$router.push({
-        name: "AddNewContact",
+        name: "AddNewContact"
       });
     },
     showContact(contact) {
       this.$router.push({
         name: "ShowContact",
         params: {
-          id: contact.ID,
-        },
+          id: contact.ID
+        }
       });
     },
     delContact(id) {
-      this.contacts = this.contactss.filter((contact) => contact.ID !== id);
-    },
+      this.contacts = this.contactss.filter(contact => contact.ID !== id);
+    }
   },
   mounted() {
     axios
       .get("http://localhost:9190/getAllContacts")
-      .then((response) => {
+      .then(response => {
         this.contacts = response.data;
       })
-      .catch((err) => console.log(err));
-  },
+      .catch(err => console.log(err));
+  }
 };
 </script>
+<style>
+.home {
+  background-color: black;
+}
+</style>
