@@ -33,16 +33,13 @@
                 :options="options"
                 required
               ></b-form-select>
-              <b-input-group>
-                <b-input-group-prepend is-text>
-                  <b-icon icon="envelope"></b-icon>
-                </b-input-group-prepend>
+              
 
                 <b-form-input
                   class="mb-2 mr-sm-2 mb-sm-0"
                   v-model="email.value"
                 ></b-form-input>
-              </b-input-group>
+             
             </b-form>
           </div>
         </b-form-group>
@@ -84,7 +81,7 @@
 </template>
 <script>
 import axios from "axios";
-import { BIcon, BIconEnvelope, BIconPencilSquare } from "bootstrap-vue";
+import { BIcon,  BIconPencilSquare } from "bootstrap-vue";
 import AddEditContactButtonBack from "../components/AddEditContact.Button.backhome.vue";
 import AddEditContactButtonSubmit from "../components/AddEditContact.Button.Submit.vue";
 export default {
@@ -93,7 +90,7 @@ export default {
     AddEditContactButtonBack,
     AddEditContactButtonSubmit,
     BIcon,
-    BIconEnvelope,
+    
     BIconPencilSquare
   },
   data() {

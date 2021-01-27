@@ -21,13 +21,13 @@ export default {
         company: "",
         email: [
           {
-            type: "",
+            type: null,
             value: ""
           }
         ],
         mobile: [
           {
-            type: "",
+            type: null,
             value: ""
           }
         ]

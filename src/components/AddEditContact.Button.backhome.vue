@@ -22,6 +22,6 @@ export default {
 <style>
 .btn3 {
   border-radius: 100%;
-  margin: 20px 600px auto 60px;
+  margin: 20px 600px auto 40px;
 }
 </style>

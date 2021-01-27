@@ -13,36 +13,31 @@
         required
       ></b-form-select>
 
-      <b-input-group>
-        <b-input-group-prepend is-text>
-          <b-icon icon="envelope"></b-icon>
-        </b-input-group-prepend>
+     
+        
         <b-form-input
           class="mb-2 mr-sm-2 mb-sm-0"
           v-model="email.value"
-          placeholder="userID"
+          placeholder="Email"
         ></b-form-input>
-      </b-input-group>
+      
       <b-button @click="addEmail" class="btn" variant="success">+</b-button>
     </b-form>
   </div>
 </template>
 <script>
-import { BIcon, BIconEnvelope } from "bootstrap-vue";
+
 export default {
   name: "AddEditContact.email",
   props: {
     emails: { type: Array, required: true }
   },
-  components: {
-    BIcon,
-    BIconEnvelope
-  },
+  
   methods: {
     addEmail() {
       this.emails.push({
-        type: "",
-        value: null
+        type: null,
+        value: ""
       });
     }
   },
