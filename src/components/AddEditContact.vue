@@ -1,6 +1,21 @@
 <template>
   <div class="container">
-    <b-form>
+    <b-container>
+      <b-row align-h="between">
+        <b-col cols="4"
+          ><add-edit-contact-button-backhome @go-back="goBack" />
+        </b-col>
+        <b-col cols="4">
+          <add-edit-contact-button-submit
+            :form="form"
+            @onSave="$emit('onSave', form)"
+          />
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <b-avatar class="mr-3 avatar" variant="primary"> </b-avatar>
+    <b-form class="form-container">
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
         <b-form-input
           v-model="form.name"
@@ -16,76 +31,29 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Your email:">
-        <b-form
-          class="mb-2 mr-sm-2 mb-sm-0"
-          inline
-          v-for="(email, $pindex) in form.email"
-          :key="'hello' + $pindex"
-        >
-          <b-form-select
-            class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="email.type"
-            :options="options"
-            required
-          ></b-form-select>
-
-          <b-form-input
-            class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="email.value"
-            placeholder="username"
-          ></b-form-input>
-          <b-button @click="addEmail" class="btn" variant="success">+</b-button>
-        </b-form>
+      <b-form-group label=" Email Addresses:">
+        <add-edit-contact-email :emails="form.email" />
       </b-form-group>
 
-      <b-form-group label="Your Number:" class="mb-2 mr-sm-2 mb-sm-0">
-        <b-form
-          class="mb-2 mr-sm-2 mb-sm-0"
-          v-for="(mobile, $index) in form.mobile"
-          :key="$index"
-          inline
-        >
-          <b-form-select
-            class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="mobile.type"
-            :options="options"
-            required
-          ></b-form-select>
-
-          <b-form-input
-            class="mb-2 mr-sm-2 mb-sm-0"
-            v-model="mobile.value"
-            placeholder="Enter number"
-            required
-          ></b-form-input>
-          <b-button @click="addMobileNum" class="btn" variant="success"
-            >+</b-button
-          >
-        </b-form>
+      <b-form-group label="Contact Numbers:" class="mb-2 mr-sm-2 mb-sm-0">
+        <add-edit-contact-mobile :mobiles="form.mobile" />
       </b-form-group>
-      <div>
-        <b-button
-          @click="goBack"
-          class="mb-2 mr-sm-2 mb-sm-0 "
-          type="submit"
-          variant="primary"
-          >Back</b-button
-        >
-
-        <b-button
-          class="mb-2 mr-sm-2 mb-sm-0 "
-          @click="$emit('onSave', form)"
-          type="submit"
-          variant="primary"
-          >Submit</b-button
-        >
-      </div>
     </b-form>
   </div>
 </template>
 <script>
+import AddEditContactEmail from "./AddEditContact.email.vue";
+import AddEditContactMobile from "./AddEditContact.mobile.vue";
+import AddEditContactButtonSubmit from "./AddEditContact.Button.Submit.vue";
+import AddEditContactButtonBackhome from "./AddEditContact.Button.backhome.vue";
 export default {
+  name: "AddEditContact",
+  components: {
+    AddEditContactEmail,
+    AddEditContactMobile,
+    AddEditContactButtonSubmit,
+    AddEditContactButtonBackhome
+  },
   props: {
     form: { type: Object, required: true }
   },
@@ -99,21 +67,19 @@ export default {
     };
   },
   methods: {
-    addMobileNum() {
-      this.form.mobile.push({
-        type: "",
-        value: null
-      });
-    },
-    addEmail() {
-      this.form.email.push({
-        type: "",
-        value: null
-      });
-    },
     goBack() {
       this.$router.push({ name: "Home" });
     }
   }
 };
 </script>
+<style>
+.form-container {
+  margin: auto;
+  padding-top: 40px;
+}
+.avatar {
+  position: relative;
+  margin-top: 30px;
+}
+</style>
